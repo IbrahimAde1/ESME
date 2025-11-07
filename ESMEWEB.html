@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقترح رعاية ملتقى ESME لمستقبل الصناعة 2026</title>
+    <!-- تحميل Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- تحميل خطوط جوجل (Tajawal) لتناسب اللغة العربية --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* تعريف اللون البرتقالي المخصص من الشعار */
+        :root {
+            --esme-orange: #e65c00; /* لون برتقالي مأخوذ من الشعار ومعدل ليكون مناسبًا للخلفيات الداكنة */
+            --esme-orange-dark: #cc5200;
+            --esme-orange-light: #ff7f24;
+            --esme-yellow: #facc15; /* لون أصفر (yellow-400) لتأثير الـ hover */
+        }
+
+        /* تطبيق الخط العربي الافتراضي */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* تصميم مخصص لشريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* bg-slate-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--esme-orange-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--esme-orange);
+        }
+        /* تأثير لبطاقات الرعاية */
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(230, 92, 0, 0.3), 0 4px 6px -2px rgba(230, 92, 0, 0.15); /* ظل بلون الشعار */
+        }
+
+        /* تحديث الألوان في Tailwind */
+        .text-blue-500 { color: var(--esme-orange); }
+        .text-blue-400 { color: var(--esme-orange-light); }
+        .hover\:text-blue-400:hover { color: var(--esme-orange-light); }
+        .bg-blue-600 { background-color: var(--esme-orange); }
+        .hover\:bg-blue-700:hover { background-color: var(--esme-orange-dark); }
+        .bg-blue-500\/10 { background-color: rgba(230, 92, 0, 0.1); }
+        .border-blue-500 { border-color: var(--esme-orange); }
+        .from-blue-900\/50 { background-image: linear-gradient(to top, rgba(230, 92, 0, 0.3), transparent); } /* تدرج برتقالي */
+        .bg-blue-500 { background-color: var(--esme-orange); }
+        /* لتحديث الأيقونات الخضراء في سجلنا الحافل */
+        .text-green-400 { color: var(--esme-orange-light); }
+
+        /* --- تأثير الـ Hover على بطاقات الأجندة --- */
+        .timeline-card {
+            border-width: 2px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .timeline-card h3 {
+            transition: color 0.3s ease;
+        }
+        .timeline-card:hover {
+            border-color: var(--esme-yellow); /* تغيير لون الإطار إلى الأصفر */
+            transform: translateY(-4px); /* إضافة تأثير رفع بسيط */
+            cursor: pointer; /* تغيير شكل المؤشر */
+        }
+        .timeline-card:hover h3 {
+            color: var(--esme-yellow); /* تغيير لون العنوان إلى الأصفر */
+        }
+        
+        /* --- جديد: تأثير Hover لأزرار الرعاية --- */
+        .sponsor-btn {
+            cursor: pointer;
+        }
+
+        /* --- ستايل لظهور المودال --- */
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+             transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal.hidden .modal-content {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        .modal:not(.hidden) .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* --- جديد: ستايل لحقول الإدخال --- */
+        .form-input {
+            background-color: #334155; /* bg-slate-700 */
+            border: 1px solid #475569; /* border-slate-600 */
+            color: #f1f5f9; /* text-slate-100 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--esme-orange-light);
+            box-shadow: 0 0 0 3px rgba(255, 127, 36, 0.3); /* ظل برتقالي */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- شريط التنقل (Navbar) --><header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- الشعار --><a href="#" class="h-10">
+                <img src="https://i.imgur.com/2s3V09h.png" alt="ESME Logo" class="h-full object-contain">
+            </a>
+            
+            <!-- روابط التنقل (للشاشات الكبيرة) --><div class="hidden md:flex space-x-6 space-x-reverse items-center">
+                <a href="#about" class="text-slate-300 hover:text-blue-400 transition-colors duration-300">عن ESME</a>
+                <a href="#event" class="text-slate-300 hover:text-blue-400 transition-colors duration-300">تفاصيل الملتقى</a>
+                <a href="#why-partner" class="text-slate-300 hover:text-blue-400 transition-colors duration-300">لماذا الشراكة؟</a>
+                <a href="#packages" class="text-slate-300 hover:text-blue-400 transition-colors duration-300">باقات الرعاية</a>
+                <a href="#contact" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    تواصل معنا
+                </a>
+            </div>
+            
+            <!-- زر القائمة (للموبايل) --><div class="md:hidden">
+                <button id="menu-btn" class="text-slate-200 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- القائمة (للموبايل) --><div id="mobile-menu" class="hidden md:hidden bg-slate-800 shadow-xl">
+            <a href="#about" class="block py-3 px-6 text-slate-200 hover:bg-slate-700 transition-colors duration-300">عن ESME</a>
+            <a href="#event" class="block py-3 px-6 text-slate-200 hover:bg-slate-700 transition-colors duration-300">تفاصيل الملتقى</a>
+            <a href="#why-partner" class="block py-3 px-6 text-slate-200 hover:bg-slate-700 transition-colors duration-300">لماذا الشراكة؟</a>
+            <a href="#packages" class="block py-3 px-6 text-slate-200 hover:bg-slate-700 transition-colors duration-300">باقات الرعاية</a>
+            <a href="#contact" class="block py-3 px-6 text-blue-400 font-semibold hover:bg-slate-700 transition-colors duration-300">تواصل معنا</a>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي --><main>
+
+        <!-- 1. القسم الرئيسي (Hero) والمقدمة التنفيذية --><section id="home" class="relative min-h-screen flex items-center justify-center text-center px-6 py-20 overflow-hidden">
+            <!-- تأثير خلفية متدرج --><div class="absolute inset-0 -z-10 h-full w-full bg-slate-900 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-20"></div>
+
+            <div class="container mx-auto z-10">
+                <span class="inline-block bg-blue-500/10 text-blue-400 px-4 py-1 rounded-full text-sm font-semibold mb-4">
+                    Flagship Event 2026
+                </span>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    ملتقى مستقبل الصناعة 2026
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-blue-400 mb-8">
+                    "سد الفجوة بين الأكاديميا والصناعة 4.0"
+                </h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-300 mb-10">
+                    نحن لا نبحث عن مجرد رعاية، بل عن شركاء حقيقيين يؤمنون بأهمية الاستثمار في الجيل القادم من المهندسين المصريين ومستقبل الصناعة في مصر.
+                </p>
+                <a href="#packages" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    اكتشف باقات الرعاية
+                </a>
+            </div>
+        </section>
+
+        <!-- --- تمت إعادته: 2. عن الجمعية (ESME) --- -->
+        <section id="about" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">
+                        عن <span class="text-blue-500">ESME</span>
+                    </h2>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        الكيان العلمي الطلابي الأول لمهندسي المواد في مصر وشمال إفريقيا، نعمل كحلقة وصل حيوية لسد الفجوة بين الدراسة الأكاديمية ومتطلبات سوق العمل.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- رؤيتنا -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">رؤيتنا</h3>
+                        <p class="text-slate-300">
+                            أن نصبح الكيان الطلابي الرائد في مصر الذي يربط بفاعلية بين الأوساط الأكاديمية والصناعية في مجال هندسة الفلزات والمواد.
+                        </p>
+                    </div>
+                    <!-- مهمتنا -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">مهمتنا</h3>
+                        <p class="text-slate-300">
+                            تعزيز الجاهزية المهنية للطلاب من خلال توفير تدريب عملي، وتطوير المهارات، وربطهم مباشرة بأصحاب العمل المحتملين.
+                        </p>
+                    </div>
+                    <!-- سجلنا الحافل -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700 md:col-span-2 lg:col-span-1">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">سجلنا الحافل</h3>
+                        <ul class="space-y-2 text-slate-300">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                مؤتمرات (EISC) علمية ناجحة.
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                زيارات ميدانية لكبرى قلاع الصناعة (مثل "عز للصلب").
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                ورش عمل متخصصة (لحام، اختبار مواد، سلامة).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم "عن ESME" --- -->
+
+        <!-- --- تمت إعادته: 3. الفعالية (الأجندة) --- -->
+        <section id="event" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">
+                        الفعالية: "ملتقى مستقبل الصناعة 2026"
+                    </h2>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        تجربة تفاعلية شاملة مصممة لربط +150 من أفضل طلاب الهندسة بقادة الصناعة ومناqشة تحديات وفرص الصناعة 4.0.
+                    </p>
+                </div>
+
+                <!-- الأجندة (تصميم الخط الزمني) -->
+                <div class="relative max-w-3xl mx-auto">
+                    <!-- الخط الزمني العمودي -->
+                    <div class="absolute left-1/2 -ml-px w-0.5 h-full bg-slate-700" style="left: calc(50% - 1px);"></div>
+
+                    <!-- عنصر في الأجندة -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التوقيت (يمين) -->
+                            <div class="text-center md:text-right md:pr-16">
+                                <time class="text-2xl font-bold text-blue-400">09:00 - 09:30</time>
+                            </div>
+                            <!-- التفاصيل (يسار) -->
+                            <div data-modal-target="ignition-hub" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:ml-8">
+                                <h3 class="text-xl font-bold text-white mb-2">The Ignition Hub (الافتتاح والتسجيل)</h3>
+                                <p class="text-slate-300">بدء اليوم بركن القهوة و "Icebreaker Bingo" للتشبيك المبكر.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- عنصر في الأجندة -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التفاصيل (يمين) -->
+                            <div data-modal-target="ai-command" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:mr-8 md:order-1 order-2">
+                                <h3 class="text-xl font-bold text-white mb-2">AI in Command (الجلسة التقنية الأولى)</h3>
+                                <p class="text-slate-300">المتحدث: د. طارق الشيخ. تصميم المواد بالمحاكاة (Digital Twins) والطباعة ثلاثية الأبعاد للمعادن.</p>
+                            </div>
+                            <!-- التوقيت (يسار) -->
+                            <div class="text-center md:text-left md:pl-16 md:order-2 order-1">
+                                <time class="text-2xl font-bold text-blue-400">09:45 - 11:00</time>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- عنصر في الأجندة -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التوقيت (يمين) -->
+                            <div class="text-center md:text-right md:pr-16">
+                                <time class="text-2xl font-bold text-blue-400">11:30 - 12:45</time>
+                            </div>
+                            <!-- التفاصيل (يسار) -->
+                            <div data-modal-target="green-steel" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:ml-8">
+                                <h3 class="text-xl font-bold text-white mb-2">ثورة الصلب الأخضر (الجلسة التقنية الثانية)</h3>
+                                <p class="text-slate-300">المتحدثون: د. إيمان وممثل عن المركبي للصلب. الأتمتة ومستقبل "الصلب الأخضر" (Green Steel).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- عنصر في الأجندة (مميز) -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التفاصيل (يمين) -->
+                            <div data-modal-target="opportunity-hub" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:mr-8 md:order-1 order-2">
+                                <h3 class="text-xl font-bold text-white mb-2">The Opportunity Hub (الاستراحة الرئيسية)</h3>
+                                <p class="text-slate-300 font-semibold">النقطة الأهم للرعاة:</p>
+                                <ul class="list-disc list-inside text-slate-300 mt-2">
+                                    <li>ركن الرعاة (Sponsors Alley): تحدث مباشر مع ممثلي الشركات.</li>
+                                    <li>عيادة السيرة الذاتية (CV Clinic): مراجعة السير الذاتية.</li>
+                                </ul>
+                            </div>
+                            <!-- التوقيت (يسار) -->
+                            <div class="text-center md:text-left md:pl-16 md:order-2 order-1">
+                                <time class="text-2xl font-bold text-blue-400">12:45 - 14:00</time>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- عنصر في الأجندة -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التوقيت (يمين) -->
+                            <div class="text-center md:text-right md:pr-16">
+                                <time class="text-2xl font-bold text-blue-400">14:00 - 15:00</time>
+                            </div>
+                            <!-- التفاصيل (يسار) -->
+                            <div data-modal-target="oil-data" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:ml-8">
+                                <h3 class="text-xl font-bold text-white mb-2">من بئر البترول إلى البيانات (Case Study)</h3>
+                                <p class="text-slate-300">دراسة حالة عن اختيار المواد المقاومة للتآكل واستخدام (IoT) للمراقبة.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- عنصر في الأجندة -->
+                    <div class="relative mb-12">
+                        <div class="absolute left-1/2 -ml-4 w-8 h-8 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <!-- التفاصيل (يمين) -->
+                            <div data-modal-target="engineer-stack" class="timeline-card bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-700 md:mr-8 md:order-1 order-2">
+                                <h3 class="text-xl font-bold text-white mb-2">The Engineer's Stack (الجلسة الختامية)</h3>
+                                <p class="text-slate-300">ما هي المهارات المفقودة لسوق 2026؟ (Power Skills) وأهمية إتقان (SolidWorks/ANSYS/Python).</p>
+                            </div>
+                            <!-- التوقيت (يسار) -->
+                            <div class="text-center md:text-left md:pl-16 md:order-2 order-1">
+                                <time class="text-2xl font-bold text-blue-400">15:00 - 15:45</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم "الفعالية" --- -->
+
+        <!-- --- تمت إعادته: 4. لماذا الشراكة معنا؟ --- -->
+        <section id="why-partner" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">
+                        لماذا الشراكة معنا؟
+                    </h2>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        شراكتكم معنا هي استثمار مباشر في مستقبل صناعتكم. نقدم لكم قيمة حقيقية وملموسة.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- الميزة الأولى -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700 text-center">
+                        <div class="flex justify-center mb-6">
+                            <div class="bg-blue-500/10 p-4 rounded-full">
+                                <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0-5.658 0M10.5 3.5c-4.18 0-7.5 3.112-7.5 6.95S6.32 17.4 10.5 17.4s7.5-3.112 7.5-6.95S14.68 3.5 10.5 3.5Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 10.5c-1.134 0-2.043.9-2.043 2.013 0 1.113.909 2.013 2.043 2.013s2.043-.9 2.043-2.013c0-1.113-.909-2.013-2.043-2.013Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 19.128a9.38 9.38 0 0 1-5.658 0M14.25 3.504c.468 0 .93.02 1.383.059a7.5 7.5 0 0 1 3.321 13.385M5.25 3.504c-.468 0-.93.02-1.383.059a7.5 7.5 0 0 0-3.321 13.385" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">الوصول المباشر للمواهب</h3>
+                        <p class="text-slate-300">
+                            فرصة حصرية للقاء أفضل 150 طالب هندسة، واستلام السير الذاتية مباشرة في "ركن الرعاة" (Sponsors Alley).
+                        </p>
+                    </div>
+
+                    <!-- الميزة الثانية -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700 text-center">
+                        <div class="flex justify-center mb-6">
+                            <div class="bg-blue-500/10 p-4 rounded-full">
+                                <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402.03 2.09.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.5-1.084.58-2.312.9-3.57 1.153a.75.75 0 0 1-.8-1.3c.792-.41 1.516-1.03 2.13-1.853m0-9.18a4.5 4.5 0 0 0-9 0v.75c0 .704.03 1.402.09 2.09M15.84 10.34c.06.688.09 1.386.09 2.09v.75a4.5 4.5 0 1 0 0-9h-.75c-.704 0-1.402-.03-2.09-.09m0 9.18c-.253.962-.584 1.892-.985 2.783.247.55-.06 1.21.463 1.5 1.084.58 2.312.9 3.57 1.153a.75.75 0 0 0 .8-1.3c-.792-.41-1.516-1.03-2.13-1.853m0-9.18a4.5 4.5 0 0 1 9 0v.75c0 .704-.03 1.402-.09 2.09" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">الحضور البارز للعلامة التجارية</h3>
+                        <p class="text-slate-300">
+                            وضع علامتكم كـ "شريك استراتيجي" للفعالية الأهم في هندسة المواد بجامعة القاهرة، والظهور كجهة رائدة تدعم المهندسين.
+                        </p>
+                    </div>
+
+                    <!-- الميزة الثالثة -->
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700 text-center">
+                        <div class="flex justify-center mb-6">
+                            <div class="bg-blue-500/10 p-4 rounded-full">
+                                <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">المسؤولية المجتمعية (CSR)</h3>
+                        <p class="text-slate-300">
+                            دعمكم المباشر يساهم في تطوير التعليم الهندسي في مصر وسد الفجوة بين الأكاديميا والصناعة بشكل فعال.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم "لماذا الشراكة" --- -->
+
+        <!-- --- تمت إعادته: 5. باقات الرعاية --- -->
+        <section id="packages" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">
+                        باقات الرعاية المقترحة
+                    </h2>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        نقدم باقات مرنة مصممة لتناسب أهدافكم الاستراتيجية وتحقق أقصى استفادة.
+                    </p>
+                </div>
+
+                <!-- جدول الباقات -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- الباقة البلاتينية (مميزة) -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-2xl p-8 border-2 border-blue-500 relative overflow-hidden">
+                        <span class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">الأكثر اختياراً</span>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">الراعي البلاتيني</h3>
+                        <p class="text-lg font-semibold text-white mb-6">(Title Sponsor)</p>
+                        <p class="text-slate-300 mb-8">رعاية حصرية للفعالية بأكملها لظهور لا مثيل له.</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                كلمة افتتاحية (5 دقائق)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                أولوية في "ركن الرعاة"
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                الشعار الأبرز (مسرح، مدخل، كافة المطبوعات)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                6 منشورات مخصصة (Social Media)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                توزيع مواد ترويجية في حقائب الحضور
+                            </li>
+                        </ul>
+                        <a href="#" data-sponsor-target="الراعي البلاتيني" class="sponsor-btn block w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-blue-700 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+
+                    <!-- الباقة الذهبية -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-lg p-8 border border-slate-700">
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">الراعي الذهبي</h3>
+                        <p class="text-lg font-semibold text-white mb-6">Gold Sponsor</p>
+                        <p class="text-slate-300 mb-8">رعاية جلسة تقنية أو استراحة رئيسية.</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                تواجد في "ركن الرعاة"
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شعار كبير (شاشات الجلسة، مطبوعات)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                3 منشورات على (Social Media)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                توزيع مواد ترويجية في الركن
+                            </li>
+                        </ul>
+                        <a href="#" data-sponsor-target="الراعي الذهبي" class="sponsor-btn block w-full text-center bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-slate-600 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+
+                    <!-- الباقة الفضية -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-lg p-8 border border-slate-700">
+                        <h3 class="text-3xl font-bold text-slate-400 mb-4">الراعي الفضي</h3>
+                        <p class="text-lg font-semibold text-white mb-6">Silver Sponsor</p>
+                        <p class="text-slate-300 mb-8">شريك داعم للحدث لتعزيز الظهور.</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شعار متوسط (على المطبوعات)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                ذكر في منشور الشكر
+                            </li>
+                        </ul>
+                        <a href="#" data-sponsor-target="الراعي الفضي" class="sponsor-btn block w-full text-center bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-slate-600 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+                    
+                    <!-- رعاية عينية -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-lg p-8 border border-slate-700">
+                        <h3 class="text-3xl font-bold text-teal-400 mb-4">رعاية عينية</h3>
+                        <p class="text-lg font-semibold text-white mb-6">In-Kind Sponsor</p>
+                        <p class="text-slate-300 mb-8">شريك لوجستي (مثل رعاية ركن القهوة أو المطبوعات).</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شعار حسب الاتفاق (مثال: ركن القهوة)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                ذكر في منشور الشكر
+                            </li>
+                        </ul>
+                        <a href="#" data-sponsor-target="رعاية عينية" class="sponsor-btn block w-full text-center bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-slate-600 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم "باقات الرعاية" --- -->
+
+        <!-- --- هذا القسم موجود بالفعل --- -->
+        <section id="register" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">
+                        تسجيل حضور الطلاب
+                    </h2>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        اختر الباقة المناسبة وقم بتأكيد تسجيلك للانضمام إلينا في "ملتقى مستقبل الصناعة 2026".
+                    </p>
+                </div>
+
+                <!-- باقات التذاكر للطلاب -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    
+                    <!-- باقة 100ج -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-2xl p-8 border-2 border-blue-500 relative overflow-hidden">
+                        <span class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">الباقة الكاملة</span>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">تذكرة 100 جنيه</h3>
+                        <p class="text-slate-300 mb-8">تشمل (فطار + غداء + شهادة حضور).</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                وجبة إفطار (Snacks)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                وجبة غداء كاملة
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شهادة حضور معتمدة
+                            </li>
+                        </ul>
+                        <a href="#" data-ticket-type="الباقة الكاملة (100ج)" data-ticket-price="100" class="register-btn block w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-blue-700 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+
+                    <!-- باقة 50ج -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-lg p-8 border border-slate-700">
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">تذكرة 50 جنيه</h3>
+                        <p class="text-slate-300 mb-8">تشمل (فطار + شهادة حضور).</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                وجبة إفطار (Snacks)
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شهادة حضور معتمدة
+                            </li>
+                        </ul>
+                        <a href="#" data-ticket-type="باقة الفطار (50ج)" data-ticket-price="50" class="register-btn block w-full text-center bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-slate-600 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+
+                    <!-- باقة مجانية -->
+                    <div class="package-card bg-slate-800 rounded-2xl shadow-lg p-8 border border-slate-700">
+                        <h3 class="text-3xl font-bold text-slate-400 mb-4">تذكرة مجانية</h3>
+                        <p class="text-slate-300 mb-8">تشمل (شهادة حضور فقط).</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2 ml-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                شهادة حضور معتمدة
+                            </li>
+                        </ul>
+                        <a href="#" data-ticket-type="الباقة المجانية (شهادة فقط)" data-ticket-price="0" class="register-btn block w-full text-center bg-slate-700 text-white px-6 py-3 rounded-lg font-semibold mt-10 hover:bg-slate-600 transition-colors duration-300">
+                            اختر الباقة
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم تسجيل الطلاب --- -->
+
+        <!-- --- تمت إعادته: 6. خطة التنفيذ وفريق العمل --- -->
+        <section id="team" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- الصورة -->
+                    <div class="flex justify-center">
+                        <img src="https://i.imgur.com/2s3V09h.png" alt="ESME Logo" class="rounded-lg shadow-2xl w-2/3 md:w-full max-w-sm">
+                    </div>
+                    <!-- النص -->
+                    <div>
+                        <h2 class="text-4xl font-extrabold text-white mb-6">
+                            خطة التنفيذ وفريق العمل
+                        </h2>
+                        <p class="text-lg text-slate-300 mb-6">
+                            لضمان نجاح هذه الفعالية، نمتلك هيكل تنظيمي ولجان متخصصة تتبع جدول زمني مدته 8 أسابيع لضمان تنفيذ احترافي.
+                        </p>
+                        <div class="space-y-4">
+                            <span class="inline-block bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full font-medium">
+                                اللجنة المنظمة (OC)
+                            </span>
+                            <span class="inline-block bg-teal-500/10 text-teal-400 px-4 py-2 rounded-full font-medium">
+                                لجنة العلاقات العامة (PR)
+                            </span>
+                            <span class="inline-block bg-purple-500/10 text-purple-400 px-4 py-2 rounded-full font-medium">
+                                لجنة الإعلام والتسويق (MM)
+                            </span>
+                            <span class="inline-block bg-yellow-500/10 text-yellow-400 px-4 py-2 rounded-full font-medium">
+                                اللجنة التقنية (TE)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- --- نهاية قسم "فريق العمل" --- -->
+        
+        <!-- --- تمت إعادته: 7. الخطوة التالية (Call to Action) --- -->
+        <section id="contact" class="py-20 text-center bg-gradient-to-t from-blue-900/50 to-slate-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-white mb-6">
+                    هل أنتم مستعدون للاستثمار في المستقبل؟
+                </h2>
+                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10">
+                    نحن على ثقة بأن شراكتنا ستحقق نجاحاً مبهراً لكلا الطرفين. يسعدنا تحديد اجتماع قصير معكم لمناقشة هذا المقترح بمزيد من التفصيل والإجابة على أي استفسارات لديكم.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-10">
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center">
+                        <h4 class="text-lg font-semibold text-blue-400 mb-2">احمد عباس</h4>
+                        <p class="text-slate-200">رئيس المؤسسة لعام 2026</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center">
+                        <h4 class="text-lg font-semibold text-blue-400 mb-2">البريد الإلكتروني</h4>
+                        <a href="mailto:esme.cairostudentchapter@gmail.com" class="text-slate-200 hover:text-blue-300 transition-colors duration-300">esme.cairostudentchapter@gmail.com</a>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center">
+                        <h4 class="text-lg font-semibold text-blue-400 mb-2">الهاتف</h4>
+                        <a href="tel:01223441144" class="text-slate-200 hover:text-blue-300 transition-colors duration-300" dir="ltr">012 2344 1144</a>
+                    </div>
+                </div>
+                <!-- --- تعديل: تغيير الرابط إلى زر لفتح مودال الواتساب --- -->
+                <a href="#" id="open-whatsapp-modal-btn" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    تواصل معنا الآن (عبر واتساب)
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- المودال الخاص بتفاصيل الأجندة --><div id="details-modal" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <!-- محتوى المودال -->
+        <div id="details-modal-content" class="modal-content bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 relative overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+            <!-- رأس المودال -->
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <h3 id="modal-title" class="text-2xl font-bold text-white">تفاصيل الفقرة</h3>
+                <button id="modal-close-btn" class="text-slate-400 hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- جسم المودال -->
+            <div class="p-8 max-h-[70vh] overflow-y-auto">
+                <p id="modal-description" class="text-slate-300 text-lg leading-relaxed">
+                    تفاصيل الفقرة ستظهر هنا...
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- نهاية مودال الأجندة -->
+
+    <!-- --- جديد: المودال الخاص بتسجيل الرعاية --- -->
+    <div id="sponsorship-modal" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <!-- محتوى المودال -->
+        <div class="modal-content bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 relative overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+            <!-- رأس المودال -->
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <h3 id="sponsor-modal-title" class="text-2xl font-bold text-white">تسجيل الرعاية</h3>
+                <button id="sponsor-modal-close-btn" class="text-slate-400 hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- جسم المودال -->
+            <div class="p-8">
+                <!-- محتوى الفورم -->
+                <div id="sponsor-form-content">
+                    <form id="sponsor-form" class="space-y-6">
+                        <input type="hidden" id="selected-package" name="package">
+                        
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-slate-300 mb-2">اسم الشركة</label>
+                            <input type="text" id="company" name="company" class="form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-slate-300 mb-2">الوظيفة (المسمى الوظيفي)</label>
+                            <input type="text" id="title" name="title" class="form-input" required>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div>
+                            <label for="whatsapp" class="block text-sm font-medium text-slate-300 mb-2">رقم الواتساب (مع كود الدولة)</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" class="form-input" dir="ltr" placeholder="+201234567890" required>
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                            إرسال وتأكيد الرعاية
+                        </button>
+                    </form>
+                </div>
+                <!-- رسالة النجاح -->
+                <div id="sponsor-success-message" class="hidden text-center">
+                    <h3 class="text-2xl font-bold text-green-400 mb-4">تم الاستلام بنجاح!</h3>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        شكراً لاهتمامك بالرعاية. سيتم الآن فتح برنامج البريد لديك لإرسال التفاصيل إلينا.
+                    </p>
+                    <button id="sponsor-success-close-btn" class="mt-8 bg-slate-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-slate-600 transition-colors duration-300">
+                        إغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- --- نهاية مودال الرعاية --- -->
+
+    <!-- --- جديد: المودال الخاص بالتواصل عبر واتساب --- -->
+    <div id="whatsapp-modal" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <!-- محتوى المودال -->
+        <div class="modal-content bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 relative overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+            <!-- رأس المودال -->
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <h3 class="text-2xl font-bold text-white">تواصل سريع عبر واتساب</h3>
+                <button id="whatsapp-modal-close-btn" class="text-slate-400 hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- جسم المودال -->
+            <div class="p-8">
+                <form id="whatsapp-form" class="space-y-6">
+                    <div>
+                        <label for="wa-company" class="block text-sm font-medium text-slate-300 mb-2">اسم الشركة</label>
+                        <input type="text" id="wa-company" name="company" class="form-input" required>
+                    </div>
+                    
+                    <div>
+                        <label for="wa-title" class="block text-sm font-medium text-slate-300 mb-2">الوظيفة</label>
+                        <input type="text" id="wa-title" name="title" class="form-input" required>
+                    </div>
+
+                    <div>
+                        <label for="wa-phone" class="block text-sm font-medium text-slate-300 mb-2">رقم الهاتف (واتساب)</label>
+                        <input type="tel" id="wa-phone" name="phone" class="form-input" dir="ltr" placeholder="+201234567890" required>
+                    </div>
+
+                    <div>
+                        <label for="wa-package" class="block text-sm font-medium text-slate-300 mb-2">الباقة المهتم بها</label>
+                        <select id="wa-package" name="package" class="form-input">
+                            <option value="استفسار عام">استفسار عام</option>
+                            <option value="الراعي البلاتيني">الراعي البلاتيني</option>
+                            <option value="الراعي الذهبي">الراعي الذهبي</option>
+                            <option value="الراعي الفضي">الراعي الفضي</option>
+                            <option value="رعاية عينية">رعاية عينية</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-green-500 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 space-x-reverse">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.0-6.556 5.338-11.895 11.893-11.895 3.181.0 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.0 6.556-5.338 11.895-11.893 11.895-1.995.0-3.903-.52-5.687-1.475L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.433-9.89-9.889-9.89-5.452 0-9.887 4.434-9.889 9.889.001 2.268.653 4.14 1.73 5.83l-.386 1.412 1.43 1.385z"/></svg>
+                        <span>إرسال عبر واتساب</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- --- نهاية مودال الواتساب --- -->
+
+    <!-- --- جديد: المودال الخاص بتسجيل الطلاب --- -->
+    <div id="registration-modal" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <!-- محتوى المودال -->
+        <div class="modal-content bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 relative overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+            <!-- رأس المودال -->
+            <div class="flex justify-between items-center p-6 border-b border-slate-700">
+                <h3 id="registration-modal-title" class="text-2xl font-bold text-white">تسجيل حضور طالب</h3>
+                <button id="reg-modal-close-btn" class="text-slate-400 hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- جسم المودال -->
+            <div class="p-8 max-h-[80vh] overflow-y-auto">
+                <!-- محتوى الفورم -->
+                <div id="registration-form-content">
+                    <form id="registration-form" class="space-y-4">
+                        <!-- الباقة المختارة -->
+                        <div class="bg-slate-700 p-4 rounded-lg">
+                            <p class="text-sm text-slate-400">الباقة المختارة:</p>
+                            <h4 id="reg-ticket-display" class="text-lg font-semibold text-white">الباقة الكاملة (100ج)</h4>
+                            <input type="hidden" id="reg-ticket-type" name="ticket-type">
+                            <input type="hidden" id="reg-ticket-price" name="ticket-price">
+                        </div>
+
+                        <div>
+                            <label for="reg-name" class="block text-sm font-medium text-slate-300 mb-2">الاسم كامل (باللغة العربية)</label>
+                            <input type="text" id="reg-name" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="reg-nid" class="block text-sm font-medium text-slate-300 mb-2">الرقم القومي (14 رقم)</label>
+                            <input type="text" id="reg-nid" name="nid" inputmode="numeric" pattern="\d{14}" title="يجب إدخال 14 رقم" class="form-input" dir="ltr" required>
+                        </div>
+
+                        <div>
+                            <label for="reg-whatsapp" class="block text-sm font-medium text-slate-300 mb-2">رقم الواتساب (للتواصل)</label>
+                            <input type="tel" id="reg-whatsapp" name="whatsapp" class="form-input" dir="ltr" placeholder="+201234567890" required>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="reg-department" class="block text-sm font-medium text-slate-300 mb-2">القسم</label>
+                                <input type="text" id="reg-department" name="department" class="form-input" required>
+                            </div>
+                            <div>
+                                <label for="reg-year" class="block text-sm font-medium text-slate-300 mb-2">السنة الدراسية</label>
+                                <select id="reg-year" name="year" class="form-input" required>
+                                    <option value="">اختر السنة</option>
+                                    <option value="إعدادي">إعدادي</option>
+                                    <option value="الأولى">الأولى</option>
+                                    <option value="الثانية">الثانية</option>
+                                    <option value="الثالثة">الثالثة</option>
+                                    <option value="الرابعة">الرابعة</option>
+                                    <option value="خريج">خريج</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="reg-source" class="block text-sm font-medium text-slate-300 mb-2">كيف عرفت عننا؟</label>
+                            <input type="text" id="reg-source" name="source" class="form-input" placeholder="مثال: فيسبوك، صديق،..." required>
+                        </div>
+
+                        <button type="submit" id="reg-submit-btn" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                            تأكيد التسجيل
+                        </button>
+                    </form>
+                </div>
+                <!-- رسالة النجاح -->
+                <div id="registration-success-message" class="hidden text-center">
+                    <h3 class="text-2xl font-bold text-green-400 mb-4">تم التسجيل بنجاح!</h3>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        شكراً لتسجيلك. لقد تم حفظ بياناتك وسنتواصل معك قريباً لتأكيد الحضور وتفاصيل الدفع (إذا كانت الباقة مدفوعة).
+                    </p>
+                    <button id="reg-success-close-btn" class="mt-8 bg-slate-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-slate-600 transition-colors duration-300">
+                        إغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- --- نهاية مودال تسجيل الطلاب --- -->
+
+    <!-- تذييل الصفحة (Footer) --><footer class="bg-slate-900 border-t border-slate-800 py-8">
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <p>
+                &copy; 2025 - 2026 | الجمعية المصرية لمهندسي المواد (ESME) - فرع طلاب جامعة القاهرة.
+            </p>
+            <p class="text-sm mt-2">
+                مصمم لسد الفجوة بين الأكاديميا والصناعة 4.0
+            </p>
+        </div>
+    </footer>
+
+    <!-- --- تعديل: تحويل السكريبت إلى module وإضافة Firebase --- -->
+    <script type="module">
+        // --- جديد: إضافة Firebase ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- إعدادات Firebase ---
+        // (يتم استبدالها تلقائياً بالبيانات الحقيقية في بيئة التشغيل)
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let app, db, auth, userId;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            setLogLevel('Debug'); // لإظهار الأخطاء في الكونسول
+
+            // تسجيل الدخول كمستخدم مجهول لحفظ البيانات
+            if (typeof __initial_auth_token !== 'undefined') {
+                await signInWithCustomToken(auth, __initial_auth_token);
+                console.log("Authenticated with custom token.");
+            } else {
+                await signInAnonymously(auth);
+                console.log("Authenticated anonymously.");
+            }
+            userId = auth.currentUser?.uid || crypto.randomUUID();
+            console.log("App ID:", appId, "User ID:", userId);
+
+        } catch (error) {
+            console.error("Firebase initialization failed:", error);
+        }
+        // --- نهاية إعدادات Firebase ---
+
+
+        // (الكود القديم الخاص بالقائمة والتمرير موجود هنا)
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // التعامل مع التمرير السلس وإغلاق القائمة
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // إغلاق قائمة الموبايل إذا كانت مفتوحة
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // التمرير السلس للقسم
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // حساب إزاحة شريط التنقل
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20; // 20px
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- منطق مودال تفاصيل الأجندة ---
+
+        // 1. مخزن البيانات (التفاصيل)
+        const modalDetails = {
+            'ignition-hub': {
+                title: 'The Ignition Hub (الافتتاح والتسجيل)',
+                description: 'الوقت: 09:00 - 09:30.\n\nهذه هي نقطة الانطلاق! يبدأ اليوم بفرصة ممتازة للتشبيك (Networking) مع ركن القهوة. سيتم استخدام "Icebreaker Bingo" لكسر الجليد وتشجيع الطلاب على التحدث إلى المتحدثين والرعاة والزملاء بشكل مبكر وممتع.'
+            },
+            'ai-command': {
+                title: 'AI in Command (الجلسة التقنية الأولى)',
+                description: 'الوقت: 09:45 - 11:00.\n\nالمتحدث: د. طارق الشيخ.\nجلسة تقنية عميقة تركز على كيفية قيادة الذكاء الاصطناعي لتطور تصميم المواد. ستغطي الجلسة مواضيع مثل: \n - المحاكاة المتقدمة (Digital Twins).\n - المواد الذكية (Smart Materials) التي تستجيب لبيئتها.\n - الابتكارات الحديثة في الطباعة ثلاثية الأبعاد للمعادن (Metal 3D Printing).'
+            },
+            'green-steel': {
+                title: 'ثورة الصلب الأخضر (الجلسة التقنية الثانية)',
+                description: 'الوقت: 11:30 - 12:45.\n\nالمتحدثون: د. إيمان وممثل عن المركبي للصلب.\nهذه الجلسة (Panel Discussion) تناقش مستقبل أهم صناعة في مصر: الصلب. سيتم التركيز على: \n - دور الأتمتة (Automation) والروبوتات في زيادة كفاءة المصانع.\n - مستقبل "الصلب الأخضر" (Green Steel) وكيفية تقليل الانبعاثات الكربونية.\n - دور الهيدروجين الأخضر كبديل للوقود الأحفوري في عمليات الاختزال.'
+            },
+            'opportunity-hub': {
+                title: 'The Opportunity Hub (الاستراحة الرئيسية)',
+                description: 'الوقت: 12:45 - 14:00.\n\nهذه هي النقطة الأهم للتفاعل المباشر بين الرعاة والطلاب. تشمل الاستراحة: \n 1. ركن الرعاة (Sponsors Alley): مساحة مخصصة للشركات الراعية (مثلكم) للقاء الطلاب المتميزين، استلام السير الذاتية، ومناقشة فرص التدريب الصيفي والتوظيف.\n 2. عيادة السيرة الذاتية (CV Clinic): مراجعة سريعة للسير الذاتية للطلاب من قبل متخصصين في الموارد البشرية.'
+            },
+            'oil-data': {
+                title: 'من بئر البترول إلى البيانات (Case Study)',
+                description: 'الوقت: 14:00 - 15:00.\n\nالمتحدثون: د. علياء وممثل عن MB للخدمات البترولية.\nدراسة حالة (Case Study) واقعية من قطاع الطاقة والبترول. تركز الجلسة على: \n - تحديات اختيار المواد المقاومة للتآكل (Corrosion Resistance) في البيئات القاسية.\n - استخدام إنترنت الأشياء (IoT) وحساسات المراقبة (Sensors) لمراقبة سلامة خطوط الأنابيب واتخاذ قرارات الصيانة الاستباقية.'
+            },
+            'engineer-stack': {
+                title: 'The Engineer\'s Stack (الجلسة الختامية)',
+                description: 'الوقت: 15:00 - 15:45.\n\nالمتحدثون: بشمهندسة صابرين، أ. معتز موسى.\nجلسة حوارية عن المهارات اللازمة لمهندس 2026. ستناقش الجلسة: \n - المهارات الشخصية (Power Skills) المفقودة في سوق العمل مثل التواصل الفعال، حل المشكلات، وإدارة المشاريع.\n - أهمية إتقان البرامج الهندسية المتقدمة مثل (SolidWorks, ANSYS) والمهارات البرمجية (مثل Python) لتحليل البيانات.'
+            }
+        };
+
+        // 2. العناصر
+        const detailsModal = document.getElementById('details-modal');
+        const detailsModalContent = document.getElementById('details-modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        // 3. دالة فتح المودال
+        function openDetailsModal(targetId) {
+            const details = modalDetails[targetId];
+            if (details) {
+                modalTitle.innerText = details.title;
+                // استخدام white-space: pre-line للسماح بـ \n (الأسطر الجديدة)
+                modalDescription.style.whiteSpace = 'pre-line'; 
+                modalDescription.innerText = details.description;
+                detailsModal.classList.remove('hidden');
+            }
+        }
+
+        // 4. دالة إغلاق المودال
+        function closeDetailsModal() {
+            detailsModal.classList.add('hidden');
+        }
+
+        // 5. ربط الأحداث
+        // فتح المودال عند النقر على بطاقة
+        document.querySelectorAll('[data-modal-target]').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                openDetailsModal(trigger.getAttribute('data-modal-target'));
+            });
+        });
+
+        // إغلاق المودال (بالزر)
+        modalCloseBtn.addEventListener('click', closeDetailsModal);
+
+        // إغلاق المودال (بالنقر على الخلفية)
+        detailsModal.addEventListener('click', (e) => {
+            if (e.target === detailsModal) {
+                closeDetailsModal();
+            }
+        });
+        
+
+        // --- جديد: منطق مودال الرعاية ---
+
+        // 1. العناصر
+        const sponsorshipModal = document.getElementById('sponsorship-modal');
+        const sponsorModalTitle = document.getElementById('sponsor-modal-title');
+        const sponsorModalCloseBtn = document.getElementById('sponsor-modal-close-btn');
+        const sponsorForm = document.getElementById('sponsor-form');
+        const hiddenPackageInput = document.getElementById('selected-package');
+        const sponsorFormContent = document.getElementById('sponsor-form-content');
+        const sponsorSuccessMessage = document.getElementById('sponsor-success-message');
+        const sponsorSuccessCloseBtn = document.getElementById('sponsor-success-close-btn');
+
+        // 2. دالة فتح مودال الرعاية
+        function openSponsorModal(packageName) {
+            sponsorModalTitle.innerText = 'تأكيد رعاية: ' + packageName;
+            hiddenPackageInput.value = packageName;
+            
+            // إعادة تعيين الفورم
+            sponsorForm.reset();
+            sponsorFormContent.classList.remove('hidden');
+            sponsorSuccessMessage.classList.add('hidden');
+            
+            sponsorshipModal.classList.remove('hidden');
+        }
+
+        // 3. دالة إغلاق مودال الرعاية
+        function closeSponsorModal() {
+            sponsorshipModal.classList.add('hidden');
+        }
+
+        // 4. دالة التعامل مع إرسال الفورم
+        function handleSponsorSubmit(e) {
+            e.preventDefault();
+            
+            // جمع البيانات
+            const packageName = hiddenPackageInput.value;
+            const company = e.target.elements.company.value;
+            const title = e.target.elements.title.value;
+            const email = e.target.elements.email.value;
+            const whatsapp = e.target.elements.whatsapp.value;
+
+            // إظهار رسالة النجاح
+            sponsorFormContent.classList.add('hidden');
+            sponsorSuccessMessage.classList.remove('hidden');
+
+            // --- تعديل: تحديث رسالة النجاح لتكون أوضح ---
+            const successText = document.querySelector('#sponsor-success-message p');
+            successText.innerHTML = `
+                تم تجهيز رسالتك! <br>
+                سيتم الآن محاولة فتح برنامج البريد لديك.
+                <br><br>
+                <strong class="text-yellow-400">إذا لم يفتح تلقائياً،</strong> الرجاء التحقق من إعدادات المتصفح أو إرسال التفاصيل يدوياً إلى:
+                <br>
+                <a href="mailto:esme.cairostudentchapter@gmail.com" class="text-blue-400 hover:underline">esme.cairostudentchapter@gmail.com</a>
+            `;
+            // --- نهاية التعديل ---
+
+            // إعداد رابط mailto
+            const toEmail = 'esme.cairostudentchapter@gmail.com';
+            // --- تعديل: إضافة "تم النقر" للعنوان والرسالة ---
+            const subject = `[تم النقر] رغبة رعاية ملتقى ESME 2026: ${packageName} - ${company}`;
+            const body = `
+                مرحباً فريق ESME،
+                
+                لقد قمنا بالنقر لتأكيد رغبتنا في رعاية ملتقى مستقبل الصناعة 2026 كـ "${packageName}".
+                
+                بيانات التواصل الخاصة بنا:
+                --------------------------------
+                اسم الشركة: ${company}
+                الاسم: [الرجاء إدخال الاسم هنا]
+                الوظيفة: ${title}
+                البريد الإلكتروني: ${email}
+                رقم الواتساب: ${whatsapp}
+                --------------------------------
+                
+                نتطلع للتواصل معكم لترتيب الخطوات التالية.
+                
+                شكراً،
+                ${company}
+            `;
+            
+            // إنشاء الرابط
+            const mailtoLink = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.trim().replace(/\n/g, '\r\n'))}`; // استخدام \r\n لتوافق أفضل
+            
+            // --- تعديل: محاولة الفتح في نافذة جديدة لزيادة الموثوقية ---
+            // فتح برنامج البريد
+            // window.location.href = mailtoLink; (الطريقة القديمة)
+            window.open(mailtoLink, '_blank'); // (الطريقة الجديدة)
+        }
+
+        // 5. ربط أحداث مودال الرعاية
+        // فتح المودال
+        document.querySelectorAll('.sponsor-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const packageName = btn.getAttribute('data-sponsor-target');
+                openSponsorModal(packageName);
+            });
+        });
+
+        // إغلاق المودال (بالزر)
+        sponsorModalCloseBtn.addEventListener('click', closeSponsorModal);
+        sponsorSuccessCloseBtn.addEventListener('click', closeSponsorModal);
+
+        // إغلاق المودال (بالنقر على الخلفية)
+        sponsorshipModal.addEventListener('click', (e) => {
+            if (e.target === sponsorshipModal) {
+                closeSponsorModal();
+            }
+        });
+
+        // التعامل مع إرسال الفورم
+        sponsorForm.addEventListener('submit', handleSponsorSubmit);
+
+
+        // --- منطق مودال الواتساب ---
+        const whatsappModal = document.getElementById('whatsapp-modal');
+        const openWhatsappModalBtn = document.getElementById('open-whatsapp-modal-btn');
+        const whatsappModalCloseBtn = document.getElementById('whatsapp-modal-close-btn');
+        const whatsappForm = document.getElementById('whatsapp-form');
+
+        // 2. دالة فتح مودال الواتساب
+        function openWhatsAppModal(e) {
+            e.preventDefault();
+            whatsappForm.reset();
+            whatsappModal.classList.remove('hidden');
+        }
+
+        // 3. دالة إغلاق مودال الواتساب
+        function closeWhatsAppModal() {
+            whatsappModal.classList.add('hidden');
+        }
+
+        // 4. دالة إرسال الفورم للواتساب
+        function handleWhatsAppSubmit(e) {
+            e.preventDefault();
+            
+            // جمع البيانات
+            const company = document.getElementById('wa-company').value;
+            const title = document.getElementById('wa-title').value;
+            const phone = document.getElementById('wa-phone').value;
+            const waPackage = document.getElementById('wa-package').value; // <-- تم تغيير "package" إلى "waPackage"
+            
+            // رقم الواتساب المستهدف (بدون +)
+            const targetPhone = '201223441144';
+
+            // إعداد الرسالة
+            const message = `
+مرحباً فريق ESME،
+
+لدي رغبة في التواصل بخصوص رعاية ملتقى 2026.
+
+البيانات:
+- الشركة: ${company}
+- الوظيفة: ${title}
+- الهاتف: ${phone}
+- الباقة المهتم بها: ${waPackage}
+            `;
+            
+            // تجهيز الرابط
+            const encodedMessage = encodeURIComponent(message.trim().replace(/\n/g, '%0A'));
+            const waURL = `https://wa.me/${targetPhone}?text=${encodedMessage}`;
+            
+            // فتح الرابط في نافذة جديدة
+            window.open(waURL, '_blank');
+            
+            // إغلاق المودال وإعادة تعيين الفورم
+            closeWhatsAppModal();
+            whatsappForm.reset();
+        }
+
+        // 5. ربط أحداث مودال الواتساب
+        openWhatsappModalBtn.addEventListener('click', openWhatsAppModal);
+        whatsappModalCloseBtn.addEventListener('click', closeWhatsAppModal);
+        whatsappForm.addEventListener('submit', handleWhatsAppSubmit);
+
+        whatsappModal.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                closeWhatsAppModal();
+            }
+        });
+
+
+        // --- جديد: منطق مودال تسجيل الطلاب ---
+
+        // 1. العناصر
+        const registrationModal = document.getElementById('registration-modal');
+        const regModalTitle = document.getElementById('registration-modal-title');
+        const regModalCloseBtn = document.getElementById('reg-modal-close-btn');
+        const registrationForm = document.getElementById('registration-form');
+        const regTicketDisplay = document.getElementById('reg-ticket-display');
+        const hiddenRegTicketType = document.getElementById('reg-ticket-type');
+        const hiddenRegTicketPrice = document.getElementById('reg-ticket-price');
+        const regFormContent = document.getElementById('registration-form-content');
+        const regSuccessMessage = document.getElementById('registration-success-message');
+        const regSuccessCloseBtn = document.getElementById('reg-success-close-btn');
+        const regSubmitBtn = document.getElementById('reg-submit-btn');
+
+        // 2. دالة فتح مودال التسجيل
+        function openRegistrationModal(ticketType, ticketPrice) {
+            regModalTitle.innerText = 'تسجيل: ' + ticketType;
+            regTicketDisplay.innerText = `${ticketType} (السعر: ${ticketPrice}ج)`;
+            hiddenRegTicketType.value = ticketType;
+            hiddenRegTicketPrice.value = ticketPrice;
+            
+            // إعادة تعيين الفورم
+            registrationForm.reset();
+            regFormContent.classList.remove('hidden');
+            regSuccessMessage.classList.add('hidden');
+            
+            registrationModal.classList.remove('hidden');
+        }
+
+        // 3. دالة إغلاق مودال التسجيل
+        function closeRegistrationModal() {
+            registrationModal.classList.add('hidden');
+        }
+
+        // 4. دالة التعامل مع إرسال فورم التسجيل
+        async function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            if (!db) {
+                console.error("Firestore (db) is not initialized.");
+                alert("حدث خطأ في الاتصال بقاعدة البيانات. الرجاء المحاولة لاحقاً.");
+                return;
+            }
+
+            regSubmitBtn.disabled = true;
+            regSubmitBtn.innerText = 'جاري التسجيل...';
+
+            // جمع البيانات
+            const dataToSave = {
+                ticketType: hiddenRegTicketType.value,
+                ticketPrice: Number(hiddenRegTicketPrice.value),
+                fullName: document.getElementById('reg-name').value,
+                nationalId: document.getElementById('reg-nid').value,
+                whatsapp: document.getElementById('reg-whatsapp').value,
+                department: document.getElementById('reg-department').value,
+                academicYear: document.getElementById('reg-year').value,
+                source: document.getElementById('reg-source').value,
+                registeredAt: new Date().toISOString(),
+                registeredBy: userId // لربط التسجيل بالمستخدم المجهول
+            };
+            
+            try {
+                // هذا هو المسار الذي سيتم حفظ البيانات فيه
+                // يمكنك أنت فقط (كمالك التطبيق) الوصول إليه
+                const collectionPath = `/artifacts/${appId}/public/data/registrations`;
+                const docRef = await addDoc(collection(db, collectionPath), dataToSave);
+                
+                console.log("Document written with ID: ", docRef.id);
+                
+                // إظهار رسالة النجاح
+                regFormContent.classList.add('hidden');
+                regSuccessMessage.classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("حدث خطأ أثناء التسجيل. الرجاء المحاولة مرة أخرى.");
+            } finally {
+                regSubmitBtn.disabled = false;
+                regSubmitBtn.innerText = 'تأكيد التسجيل';
+            }
+        }
+
+        // 5. ربط أحداث مودال التسجيل
+        // فتح المودال
+        document.querySelectorAll('.register-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const ticketType = btn.getAttribute('data-ticket-type');
+                const ticketPrice = btn.getAttribute('data-ticket-price');
+                openRegistrationModal(ticketType, ticketPrice);
+            });
+        });
+
+        // إغلاق المودال (بالزر)
+        regModalCloseBtn.addEventListener('click', closeRegistrationModal);
+        regSuccessCloseBtn.addEventListener('click', closeRegistrationModal);
+
+        // إغلاق المودال (بالنقر على الخلفية)
+        registrationModal.addEventListener('click', (e) => {
+            if (e.target === registrationModal) {
+                closeRegistrationModal();
+            }
+        });
+
+        // التعامل مع إرسال الفورم
+        registrationForm.addEventListener('submit', handleRegistrationSubmit);
+        // --- نهاية منطق مودال تسجيل الطلاب ---
+
+
+        // --- إغلاق المودالات بزر Escape ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (!detailsModal.classList.contains('hidden')) {
+                    closeDetailsModal();
+                }
+                if (!sponsorshipModal.classList.contains('hidden')) {
+                    closeSponsorModal();
+                }
+                if (!whatsappModal.classList.contains('hidden')) {
+                    closeWhatsAppModal();
+                }
+                // --- جديد: إضافة مودال التسجيل ---
+                if (!registrationModal.classList.contains('hidden')) {
+                    closeRegistrationModal();
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
